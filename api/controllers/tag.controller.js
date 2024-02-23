@@ -22,3 +22,12 @@ export const createTag = async (req, res, next) => {
     next(err);
   }
 };
+
+export const clearTags = async (req, res, next) => {
+  try {
+    await Tag.deleteMany();
+    res.status(204).json("Tags deleted succesfully.");
+  } catch (err) {
+    next(err);
+  }
+};

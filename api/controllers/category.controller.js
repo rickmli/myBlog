@@ -22,3 +22,12 @@ export const createCategory = async (req, res, next) => {
     next(err);
   }
 };
+
+export const clearCategories = async (req, res, next) => {
+  try {
+    await Category.deleteMany();
+    res.status(204).json("Categories deleted succesfully.");
+  } catch (err) {
+    next(err);
+  }
+};
