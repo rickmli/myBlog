@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import path from "path";
 import cookieParser from "cookie-parser";
 import testRoutes from "./routes/test.route.js";
+import tagRoutes from "./routes/tag.route.js";
+import categoryRoutes from "./routes/category.route.js";
+import userRoutes from "./routes/user.route.js";
 
 dotenv.config();
 
@@ -24,9 +27,9 @@ app.listen(3000, () => {
 });
 
 app.use("/api/test", testRoutes);
-// app.use("/api/auth", authRoutes);
-// app.use("/api/post", postRoutes);
-// app.use("/api/comment", commentRoutes);
+app.use("/api/tags", tagRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/users", userRoutes);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 

@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
 import defaultAvatar from "../utils/constants.js";
 
-const userSchema = new mongoose.Schema(
+const commentSchema = new mongoose.Schema(
   {
+    authorID: {
+      type: String,
+      required: true,
+    },
     content: {
       type: String,
       required: true,
@@ -11,6 +15,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
 export default User;
