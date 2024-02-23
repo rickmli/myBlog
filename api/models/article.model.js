@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import { defaultArticleImage } from "../utils/constants";
+import { defaultArticleImage } from "../utils/constants.js";
 
+const { Schema } = mongoose;
 const articleSchema = new mongoose.Schema(
   {
     authorID: {
@@ -32,12 +33,22 @@ const articleSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true,
       unique: true,
     },
   },
   { timestamps: true }
 );
+
+articleSchema.pre("save", function (next) {
+  if (!this.slug) {
+    this.slug = this.title
+      .split(" ")
+      .join("-")
+      .toLowerCase()
+      .replace(/[^a-zA-Z0-9]/g, "-");
+  }
+  next();
+});
 
 const Article = mongoose.model("Article", articleSchema);
 

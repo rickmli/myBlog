@@ -1,5 +1,14 @@
 import express from "express";
+import {
+  clearArticles,
+  createArticle,
+  getArticles,
+} from "../controllers/article.controller.js";
 
-const route = express.Router();
+const router = express.Router();
 
-route.post("comment");
+router.get("/", getArticles);
+router.post("/", createArticle);
+router.delete("/", clearArticles);
+
+export default router;

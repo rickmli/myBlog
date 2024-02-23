@@ -14,8 +14,8 @@ export const getUsers = async (req, res, next) => {
 export const createUser = async (req, res, next) => {
   const { username, password, email, avatar } = req.body;
 
-  if (!username) return next(400, "Username is required.");
-  if (!password) return next(400, "Password is required.");
+  if (!username) return next(400, "Username is required for a user.");
+  if (!password) return next(400, "Password is required for a user.");
 
   try {
     const newUser = new User({

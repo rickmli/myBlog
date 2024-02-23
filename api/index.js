@@ -7,6 +7,7 @@ import testRoutes from "./routes/test.route.js";
 import tagRoutes from "./routes/tag.route.js";
 import categoryRoutes from "./routes/category.route.js";
 import userRoutes from "./routes/user.route.js";
+import articleRoutes from "./routes/article.route.js";
 
 dotenv.config();
 
@@ -30,12 +31,19 @@ app.use("/api/test", testRoutes);
 app.use("/api/tags", tagRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/users", userRoutes);
-
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+app.use("/api/articles", articleRoutes);
+app.all("*", (req, res, next) => {
+  res.status(404).json({
+    status: "fail",
+    message: `Can't find ${req.originaUrl} on this server!`,
+  });
 });
+
+// app.use(express.static(path.join(__dirname, "/client/dist")));
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+// });
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
