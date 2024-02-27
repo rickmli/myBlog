@@ -9,6 +9,10 @@ const tagSchema = new mongoose.Schema(
     slug: {
       type: String,
     },
+    relatedArticles: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Article" }],
+      default: [],
+    },
   },
   { timestamps: true }
 );
