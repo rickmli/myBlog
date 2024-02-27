@@ -1,8 +1,7 @@
 import Article from "../models/article.model.js";
 
 export const getArticles = async (req, res, next) => {
-  const {} = req.query;
-
+  const { orderKey = "", des = true } = req.query;
   try {
     const articles = await Article.find();
     res.status(200).json(articles);
